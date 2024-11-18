@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Lsp\Server\Event;
+namespace Lsp\Server\Event\Message;
 
 use Lsp\Contracts\Rpc\Message\ResponseInterface;
-use Lsp\Server\EstablishedClientInterface;
+use Lsp\Contracts\Server\ConnectionInterface;
 
-class ResponseReceived extends MessageReceived
+class ResponseSent extends MessageSent
 {
     /**
      * @param ResponseInterface<mixed> $response
      */
     public function __construct(
         ResponseInterface $response,
-        EstablishedClientInterface $connection,
+        ConnectionInterface $connection,
     ) {
         parent::__construct($response, $connection);
     }

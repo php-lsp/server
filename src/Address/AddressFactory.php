@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lsp\Server\Address;
 
+use Lsp\Contracts\Server\AddressInterface;
 use Lsp\Server\Address\Host\HostFactory;
 use Lsp\Server\Address\Host\HostFactoryInterface;
 
@@ -39,9 +40,9 @@ final class AddressFactory implements AddressFactoryInterface
         ];
     }
 
-    public function create(string $dsn): AddressInterface
+    public function create(string|\Stringable $dsn): AddressInterface
     {
-        $parts = $this->parse($dsn);
+        $parts = $this->parse((string) $dsn);
 
         return match (\strtolower($parts['scheme'])) {
             'tcp' => $this->createTcp($parts),
